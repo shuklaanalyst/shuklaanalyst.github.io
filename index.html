@@ -1,647 +1,684 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Ravi Shukla Portfolio</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravi Shukla | SFE & Data Analyst</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #030712;
+            --surface: rgba(17, 24, 39, 0.4);
+            --surface-glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --glass-blur: blur(16px);
+            --golden-ratio: 1.618;
+        }
 
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
 
-    <link rel="stylesheet" href="css/aos.css">
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 242, 254, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(79, 172, 254, 0.08), transparent 25%);
+        }
 
-    <link rel="stylesheet" href="css/ionicons.min.css">
-    
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.618fr;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
 
+        /* ----- LEFT SIDEBAR (STICKY) ----- */
+        aside {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            max-height: 100vh;
+            overflow-y: auto;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
+        .profile-card {
+            background: var(--surface-glass);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
 
-<style>
+        /* Beautification decorative layer */
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 120px;
+            background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80') center/cover;
+            opacity: 0.3;
+            z-index: 0;
+            border-bottom: 1px solid var(--border);
+        }
 
-/*======================================
-//--//-->   ABOUT
-======================================*/
+        .profile-card > * {
+            position: relative;
+            z-index: 1;
+        }
 
-.about-mf .box-shadow-full {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
+        .img-wrapper {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            position: relative;
+            display: inline-block;
+        }
 
-.about-mf .about-img {
-  margin-bottom: 2rem;
-}
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--bg-base);
+        }
 
-.about-mf .about-img img {
-  margin-left: 10px;
-}
+        .linkedin-badge {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 28px;
+            height: 28px;
+            background: #0077b5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #0a0e1a;
+            box-shadow: 0 2px 8px rgba(0,119,181,0.6);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            z-index: 2;
+            text-decoration: none;
+        }
 
+        .linkedin-badge:hover {
+            transform: scale(1.18);
+            box-shadow: 0 4px 14px rgba(0,119,181,0.85);
+        }
 
-.skill-mf .progress {
-  /* background-color: #cde1f8; */
-  margin: .5rem 0 1.2rem 0;
-  border-radius: 0;
-  height: .7rem;
-}
+        .linkedin-badge i {
+            color: #fff;
+            font-size: 13px;
+            line-height: 1;
+        }
 
-.skill-mf .progress .progress-bar {
-  height: .7rem;
-  background-color: #ffbd39;
-}
+        .profile-card h1 {
+            font-weight: 800;
+            font-size: 1.98rem;
+            margin-bottom: 0.2rem;
+            background: linear-gradient(to right, #fff, #bdc3c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
+        .profile-card .role {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
 
-/* Animation styles */
-#typing-animation {
-  position: relative;
-  font-size: 30px;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 3s steps(20, end) infinite;
-}
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
 
-#typing-animation:before {
-  content: "";
-  /* position: absolute; */
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: #ccc;
-  animation: typing-cursor 0.5s ease-in-out infinite;
-}
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
 
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
+        .contact-info i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
 
-@keyframes typing-cursor {
-  from {
-    width: 5px;
-  }
-  to {
-    width: 0;
-  }
-}
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
 
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
 
-/* project image zoom effect */
+        .social-links a:hover {
+            background: var(--primary);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
 
-.zoom-effect {
-  overflow: hidden;
-  transition: transform 0.3s ease-out;
-}
+        /* ----- RIGHT MAIN CONTENT ----- */
+        main {
+            padding: 4rem 4rem 4rem 2rem;
+        }
 
-.zoom-effect:hover {
-  transform: scale(1.1);
-}
+        section {
+            margin-bottom: 5rem;
+        }
 
+        .section-header {
+            font-size: 2.7rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--text-main);
+            position: relative;
+            display: inline-block;
+        }
 
-</style>
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -5px;
+            width: 50%; height: 4px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 2px;
+        }
 
+        .text-lead {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            font-weight: 300;
+            background: linear-gradient(270deg, #00f2fe, #4facfe, #00f2fe, #a8ff78, #00f2fe);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: radiumGlow 15s ease infinite;
+        }
 
-  </head>
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	  
-	  
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Ravi Shukla</a>
-	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
+        @keyframes radiumGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
-	          <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
-	          <li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
-	          <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
-	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-	  <section id="home-section" class="hero">
-		  <div class="home-slider  owl-carousel">
-	       <div class="slider-item ">
-	      	<div class="overlay"></div>
-	         <div class="container">
-	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images/bg_1.png);">
-	          	 <div class="overlay"></div>
-	          	</div>
-		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '50%' }">
-		          	<div class="text">
-		          		<span class="subheading">Namaste!</span>
-			            <h1 class="mb-4 mt-3">I'm <span>Ravi Shukla</span></h1>
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
 
-						<!-- Element to contain animated typing -->
-						<span id="typing-animation"></span>
+        .stat-card {
+            background: var(--surface-glass);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
 
-						<script>
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 242, 254, 0.3);
+            background: rgba(255,255,255, 0.05);
+        }
 
-						// Initialize the typing animation
-						const typingAnimationElement = document.getElementById('typing-animation');
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.2rem;
+        }
 
-						// Create an array of typing text
-						const typingTexts = [
-						'SFE ',
-						'Data Analyst ',
-				
-						'Excel Expert  ',
-						];
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-						// Create a function to display the typing animation for a given text
-						function playTypingAnimation(text) {
-						// Loop through each character and add it to the element
-						for (let i = 0; i < text.length; i++) {
-							setTimeout(() => {
-							typingAnimationElement.textContent += text[i];
-							}, i * 200); // Increase the delay to slow down the typing animation
-						}
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
 
-						// Once the animation is complete, reset the text and start over
-						setTimeout(() => {
-							typingAnimationElement.textContent = '';
-							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
-						}, text.length * 200);
-						}
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
 
-						// Start the typing animation loop
-						playTypingAnimation(typingTexts[0]);
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
 
-						</script>
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: var(--surface-glass);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
 
-						<br>
-						
-			            <h2>A Commercial Excellence, SFE  & Data Analyst Expert</h2>
-						<!-- <h2 class="d-flex" style="margin-bottom: 0">With over 5 years of experience</h2> -->
-						<!-- <br> -->
-			            
-							<a href="https://github.com/shuklaanalyst" class="btn btn-white btn-outline-white py-3 px-4">My works</a></p>
-		            </div>
-		          </div>
-	        	</div>
-	        </div>
-	      </div>
-		</div>
-    </section>
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 10px; height: 100%;
+            background: #fff;
+            box-shadow: 0 0 10px #fff;
+        }
 
+        .tags-wrapper {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--tag-color, var(--primary));
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--tag-color, var(--primary));
+            display: inline-flex;
+            align-items: center;
+        }
 
-    <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
-    	<div class="container">
-			<div class="row">
-				<div class="row d-flex align-items-stretch">
-				<!-- <div class="row d-flex"> -->
-					<div class="col-md-6 col-lg-5 d-flex">
-						<div class="img-about img d-flex align-items-stretch">
-							<div class="overlay">
-								<div class="row">
-									<div class="col-sm-6 col-md-5">
-									  <div class="about-img">
-										<img src="images/about-me.png" class="img-fluid rounded b-shadow-a" alt="">
-									  </div>
-									</div>
-									<!-- Details next to profile image -->
-									<div class="col-sm-6 col-md-7">
-									  <div class="about-info">
-										<p><span class="title-s">Job Role: </span> <span>SFE & Data Analyst</span></p>
-										<p><span class="title-s">Experience: </span> <span>10+ years</span></p>
-										<p><span class="title-s">Address: </span> <span>Dombivli,Mumbai></p>
-									  </div>
-									</div>
-								  </div>
+        .circle-indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: conic-gradient(var(--tag-color, var(--primary)) var(--tag-percent, 90%), rgba(255, 255, 255, 0.1) 0);
+            display: inline-block;
+            margin-left: 8px;
+            box-shadow: 0 0 5px var(--tag-color, var(--primary));
+        }
 
-								<div class="skill-mf">
-									<p class="title-s">Skills</p>
-									<span>SFE</span> <span class="pull-right">90%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="60" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Advanced Excel</span> <span class="pull-right">95%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="59" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Power BI</span> <span class="pull-right">90%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Statistical Analysis</span> <span class="pull-right">85%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									<span>Data Analysis </span> <span class="pull-right">85%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>DAX</span> <span class="pull-right">50%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									<span>SQL</span> <span class="pull-right">50%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
-						<div class="row justify-content-start pb-3">
-							<div class="col-md-12 heading-section ftco-animate">
-								
-								<h1 class="big">About</h1>
-								<h2 class="mb-4">About Me</h2>
-								
-								<p> Dynamic and results-driven professional with over 10 years of expertise in commercial excellence and sales force effectiveness, 
-								specializing in sales force automation, data analytics, and CRM systems like Salesforce and Microsoft Dynamics 365. 
-								Proficient in KPI analysis, customer segmentation, and developing automated MIS reports and Power BI dashboards to optimize go-to-market strategies. 
-								Skilled in deploying SFA mobile applications and enhancing sales productivity through effective territory management and incentive programs. 
-								Proven track record in driving data-driven decision-making at a leading pharmaceutical company.
-.</p>
-								<ul class="about-info mt-4 px-md-0 px-2">
-									<li class="d-flex"><span>Profile:</span> <span>Data Science &amp; Analytics</span></li>
-									<li class="d-flex"><span>Domain:</span> <span>Pharmaceuticals &amp; Logistics </span></li>							
-									<li class="d-flex"><span>Language:</span> <span>English, Hindi</span></li>
-									<li class="d-flex"><span>BI Tools:</span> <span>Microsoft Power BI &amp; Looker</span></li>
-									<li class="d-flex"><span>Other Skills:</span> <span>Excel, Github,SQL &amp; Python</span></li>
-									
-								</ul>
-							</div>
-						</div>
+        /* Education Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
 
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
 
-						<!--<div class="counter-wrap ftco-animate d-flex mt-md-3">
-							<div class="text">
-								<p class="mb-4">
-									<span class="number" data-number="10">0</span> <span>+</span>
-									<span>&nbsp; Projects completed</span>
-								</p>
-								<p><a href="https://www.linkedin.com/in/hiravishukla/" class="btn btn-primary py-3 px-3">LinkedIn</a></p>
-							</div>
-						</div> -->
-					</div>
-				</div>
-			</div>
-		</div>
-    </section>
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
 
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-base);
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
 
+        .timeline-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
 
-	
-    <section class="ftco-section ftco-no-pb" id="resume-section">
-    	<div class="container">
-    		<div class="row justify-content-center pb-5">
-          <div class="col-md-10 heading-section text-center ftco-animate">
-          	<h1 class="big big-2">Resume</h1>
-            <h2 class="mb-4">Resume</h2>
-            <p>Seasoned SFE & Data Analyst with 10+ years of experience driving business strategies through data-driven insights. 
-			   Proven expertise in data science, statistical analysis, machine learning algorithms and project management.</p>
-          </div>
-        </div>
+        .timeline-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
 
-		<div class="row">
-			<h1 class="big-4">Experience</h1>
-			<div class="underline"></div>
-		</div>
-		<br>
-		
-		<div class="row">
-				<div class="col-md-6">
-					<div class="resume-wrap ftco-animate">
-						<span class="date">Dermis Oracle Pvt Ltd</span>
-						<h2>AGM-SFE & Commercial Excellence</h2>
-						<span class="position">Mar 25 to Present,</span>
-							</ul>
-						<span class="mt-4">Mumbai</span>
-						<p class="mt-4">DERMIS, a leading Dermatology & Cosmotology company with over 100+ professionals in India. 
-							<ul>
-								<li>Analyzed campaigns, sales, effort, and customer survey data to identify growing demand, and successfully launched a strategic product line.</li>
-								<li>I am responsible for SFE,Tools & Technology enablment, Data Analysis ,Incentive Designe & SOP and Supply Chain .</li>
-								
-						</p>
-					</div>
+        .timeline-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
 
-				</div>
+        /* GitHub Highlight Section */
+        .github-highlight {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80') center/cover;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-top: 4rem;
+        }
 
-				<div class="col-md-6">
-					<div class="resume-wrap ftco-animate">
-						<span class="date">Eisai Pharmaceuticals India Pvt Ltd </span>
-						<h2>MANAGER- SFE & Data Analyst</h2>
-						<span class="position">Sep 22-Feb 25,</span>
-						<span class="mt-4">Mumbai</span>
-						<p class="mt-4">Eisai Pharmaceuticals India Pvt. Ltd. is the Research & Development oriented company 
-						               .EIL has more than 40 subsidiaries across the globe . 
-							<ul>
-								<li>Performed in-depth market & sales data research and analysis to enhance the business outcome. Resulted in ~20% business growth MoM.</li>
-								<li>Delivered multiple training and mentorship sessions on analytical tools like SQL, MS Excel & Power BI</li>
-								
-							</ul>
-						</p>
-					</div>
+        .github-overlay {
+            background: linear-gradient(135deg, rgba(11, 15, 25, 0.95), rgba(0, 242, 254, 0.2));
+            padding: 5rem 3rem;
+            text-align: center;
+        }
 
-				</div>
-			</div>
+        .github-highlight h2 {
+            font-size: 2.7rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
 
-		<br>
-		<br>
+        .github-highlight p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-main);
+        }
 
-		<div class="row">
-			<h1 class="big-4">Education</h1>
-			<div class="underline"></div>
-		</div>
-		<br>
-		
-			<div class="row">
-    			<div class="col-md-6">
-    				<div class="resume-wrap ftco-animate">
-    					<span class="date">2009-2011</span>
-    					<h2>PGDMM</h2>
-    					<span class="position">Welingker Institute , Mumbai </span>
-    				
-    				</div>
-    			</div>
+        .btn-glow {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: #000;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4);
+            transition: all 0.3s ease;
+        }
 
-    			<div class="col-md-6">
-    				<div class="resume-wrap ftco-animate">
-    					<span class="date">2004-2007</span>
-    					<h2>B.Sc -Computer Application</h2>
-    					<span class="position">Ewing Christian College, Allahabd </span>
-    				
-    				</div>
-				</div>
-    		</div>
+        .btn-glow:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 242, 254, 0.6);
+            color: #000;
+        }
 
-    	<!-- <div class="row justify-content-center mt-5">
-    			<div class="col-md-6 text-center ftco-animate">
-    			<p><a href="https://drive.google.com/file/d/195Yyitp2tudFw2TYUoaiDp6FfuBo7pez/view?usp=sharing" class="btn btn-primary py-4 px-5">Download CV</a></p>  -->
-    			</div>
-    		</div>
-    	</div>
-    </section>
+        /* Footer */
+        footer {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
 
-   
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+            aside {
+                position: relative;
+                height: auto;
+                padding: 2rem 2rem 0 2rem;
+            }
+            main {
+                padding: 3rem 2rem;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
 
-   <!-- <section class="ftco-section" id="project-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1 class="big big-2">Projects</h1>
-            <h2 class="mb-4">Projects</h2>
-            <p>Below are the sample Data Analytics projects on SQL, Python & Power BI</p>
-          </div>
-        </div>
-        <div class="row d-flex">
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="https://github.com/rishabhnmishra/SQL_Music_Store_Analysis/blob/main/Music_Store_Query.sql" class="block-20 zoom-effect" style="background-image: url('images/proj_1.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
+    <div class="layout-grid">
+        
+        <!-- Golden Ratio: 1 part (Sidebar) -->
+        <aside>
+            <div class="profile-card">
+                <div class="img-wrapper">
+                    <img src="images/about-me.png" alt="Ravi Shukla" onerror="this.src='https://ui-avatars.com/api/?name=Ravi+Shukla&background=00f2fe&color=000'">
+                    <a href="https://www.linkedin.com/in/hiravishukla/" target="_blank" class="linkedin-badge" title="Connect on LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+                <h1>Ravi Shukla</h1>
+                <p class="role">Commercial Excellence, SFE & Data Analyst</p>
+                
+                <div class="contact-info">
+                    <div><i class="fas fa-map-marker-alt"></i> Mumbai, India</div>
+                    <div><i class="fas fa-envelope"></i> HiRavishukla@gmail.com</div>
+                    <div><i class="fas fa-phone-alt"></i> +91 9664 313233</div>
+                </div>
 
-                <h3 class="heading"><a href="https://github.com/rishabhnmishra/SQL_Music_Store_Analysis/blob/main/Music_Store_Query.sql">Digital Music Store Data Analysis using SQL</a></h3>
-                <p>Analyzed music store data using advanced SQL queires to identify gaps and increase the business growth.</p>
-              </div>
+                <div class="social-links">
+                    <a href="https://github.com/shuklaanalyst" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/hiravishukla/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="https://github.com/rishabhnmishra/Python_Diwali_Sales_Analysis/blob/main/Diwali_Sales_Analysis.ipynb" class="block-20 zoom-effect" style="background-image: url('images/proj_2.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
+        </aside>
 
-                <h3 class="heading"><a href="https://github.com/rishabhnmishra/Python_Diwali_Sales_Analysis/blob/main/Diwali_Sales_Analysis.ipynb">Data Analysis using Python Project for Beginners</a></h3>
-                <p>Performed exploratory data analysis on diwali sales data using Python to improve the customer experience.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry">
-              <a href="https://github.com/rishabhnmishra/Madhav_Store_Analysis_PowerBI/blob/main/Madhav%20Store%20dashboard.jpg" class="block-20 zoom-effect" style="background-image: url('images/proj_3.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
+        <!-- Golden Ratio: 1.618 parts (Main Content) -->
+        <main>
+            
+            <section id="about">
+                <h2 class="section-header">Uncover Hidden <br>Data Stories.</h2>
+                <p class="text-lead">
+                    I am a results-oriented Data Analyst and Commercial Excellence Strategist with over a decade of experience leading data-driven transformations in the pharmaceutical and logistics sectors. My expertise lies at the intersection of Sales Force Effectiveness (SFE), artificial intelligence, and advanced analytics, where I translate complex datasets into clear, actionable business intelligence.<br><span style="display:block; margin-top: 0.5rem;"></span>I specialize in identifying hidden revenue opportunities and optimizing go-to-market strategies. Driven by a passion for automation and deep analytical insight, I consistently enable organizations to shift from intuition-based decisions to precise, data-driven decision-making.
+                </p>
 
-                <h3 class="heading"><a href="https://github.com/rishabhnmishra/Madhav_Store_Analysis_PowerBI/blob/main/Madhav%20Store%20dashboard.jpg">Power BI Sales dashboard Project for Beginners</a></h3>
-                <p>Designed a power bi dashboard for Madhav Store to track and analyze the online sales data acorss India.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-	<br>
-		<!-- added justify-content-center to center align the last two projects -->
-		<!-- <div class="row d-flex justify-content-center">  
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-				<a href="https://github.com/rishabhnmishra/sales_forecasting/tree/main" class="block-20 zoom-effect" style="background-image: url('images/proj_4.jpg');">
-				</a>
-				<div class="text mt-3 float-right d-block">
-  
-				  <h3 class="heading"><a href="https://github.com/rishabhnmishra/sales_forecasting/tree/main">Sales Forecast- Time Series Forecasting</a></h3>
-				  <p>Used multiple machine learning models to forecast sales (retail store) and performed time series analysis.</p>
-				</div>
-			  </div>
-			</div>
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-				<a href="https://github.com/rishabhnmishra/customer_segmentation/blob/main/Customer_Segmentation-final.ipynb" class="block-20 zoom-effect" style="background-image: url('images/proj_5.jpg');">
-				</a>
-				<div class="text mt-3 float-right d-block">
-  
-				  <h3 class="heading"><a href="https://github.com/rishabhnmishra/customer_segmentation/blob/main/Customer_Segmentation-final.ipynb">Customer Segmentation using clustering model</a></h3>
-				  <p>Developed a ML model to give various recommendations of financial products &amp; services on target customer groups.</p>
-				</div>
-			  </div>
-			</div>
-		 </div> -->
-	  </div>
-    </section> -->
+                <div style="margin-top: 2rem; margin-bottom: 3rem;">
+                    <a href="https://www.linkedin.com/in/hiravishukla/" class="btn-glow" style="background: linear-gradient(135deg, #0077b5, #00f2fe); color: #fff; padding: 12px 30px; font-size: 1rem;"><i class="fab fa-linkedin-in" style="margin-right: 8px;"></i> Connect on LinkedIn</a>
+                </div>
 
-	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
-      <div class="container">
-		<div class="row d-md-flex align-items-center">
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="20">0</strong>
-                <span>Achievements</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="10">0</strong>
-                <span>Projects</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="100">0</strong>
-                <span>Mentored Students</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="20">0</strong>
-                <span>Advanced Excel Training </span>
-              </div> 
-            </div>
-          </div>
-        </div>
-      </div>
-	
-	  <div class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
-			<!-- <div class="container"> -->
-				<div class="row justify-content-center">
-					<div class="col-md-7 ftco-animate text-center">
-						<h2>More projects on<span> Github  </span> </h2>
-						<div class="heading"> <h4> I love to solve business problems &amp; uncover hidden data stories </h4>
-						<br>
-						<!-- <p><a href="https://github.com/rishabhnmishra" class="btn btn-primary py-3 px-5">GitHub</a></p> -->
-						</div>
-					</div>
-				</div>
-			<!-- </div> -->
-		</div>
-	</section>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Achievements</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Mentored Students</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                </div>
+            </section>
 
+            <section id="skills">
+                <h2 class="section-header">Skills & Expertise</h2>
+                
+                <h3 class="skill-category-title" style="color: var(--primary); font-size: 1.35rem; margin-top: 1rem; margin-bottom: 1.5rem; font-weight: 600;">Technical Tools & Platforms</h3>
+                <div class="skills-grid">
+                    <div class="skill-column">
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Advanced Excel</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Power BI</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Data Science</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Microsoft Dynamics 365</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Looker</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 75%;"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-column">
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Statistical & Data Analysis</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>DAX</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 50%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>SQL</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 50%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Python</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 50%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>AI</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 80%;"></div></div>
+                        </div>
+                    </div>
+                </div>
 
+                <h3 class="skill-category-title" style="color: var(--primary); font-size: 1.35rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 600;">Domain & Strategy</h3>
+                <div class="tags-wrapper" style="margin-top: 0;">
+                    <span class="skill-tag">SFE (Sales Force Effectiveness)</span>
+                    <span class="skill-tag">Commercial Excellence</span>
+                    <span class="skill-tag">Pharma Analytics</span>
+                    <span class="skill-tag">Pharmaceuticals & Logistics</span>
+                    <span class="skill-tag">IQVIA</span>
+                    <span class="skill-tag">SMSRC</span>
+                </div>
 
-    <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
-      <div class="container">
-      	<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1 class="big big-2">Contact</h1>
-            <h2 class="mb-4">Contact Me</h2>
-            <p>Below are the details to reach out to me!</p>
-          </div>
-        </div>
+                <h3 class="skill-category-title" style="color: var(--primary); font-size: 1.35rem; margin-top: 2rem; margin-bottom: 1.5rem; font-weight: 600;">Methodologies & Operations</h3>
+                <div class="tags-wrapper" style="margin-top: 0;">
+                    <span class="skill-tag">Data Science & Analytics</span>
+                    <span class="skill-tag">AI Enabled Insight</span>
+                    <span class="skill-tag">Dashboard</span>
+                    <span class="skill-tag">Automation</span>
+                </div>
 
-        <div class="row d-flex contact-info mb-5">
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Address</h3>
-	            <p>Mumbai, India</p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-phone2"></span>
-          		</div>
-          		<h3 class="mb-4">Contact Number</h3>
-	            <p><a href="tel://0101010101">+ 91 9664 313233</a></p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-paper-plane"></span>
-          		</div>
-          		<h3 class="mb-4">Email Address</h3>
-	            <p><a href="https://mail.google.com/">HiRavishukla@gmail.com</a></p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-globe"></span>
-          		</div>
-          		<!-- <h3 class="mb-4">Download Resume</h3>-->
-	           <!--  <p><a href="https://drive.google.com/file/d/195Yyitp2tudFw2TYUoaiDp6FfuBo7pez/view?usp=sharing">resumelink</a></p> -->
-	          </div>
-          </div>
+                <h3 class="skill-category-title" style="color: var(--primary); font-size: 1.35rem; margin-top: 2rem; margin-bottom: 1.5rem; font-weight: 600;">CRM & ERP Platforms</h3>
+                <div class="tags-wrapper" style="margin-top: 0;">
+                    <span class="skill-tag" style="--tag-color: #00a1e0; --tag-percent: 80%;">Salesforce <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #0078d4; --tag-percent: 90%;">D365 <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #ff3366; --tag-percent: 90%;">Phyzii <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #00d2ff; --tag-percent: 80%;">Hi Doctor <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #28a745; --tag-percent: 90%;">SanEforce <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #f39c12; --tag-percent: 100%;">CBO ERP <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #f0ab00; --tag-percent: 70%;">SAP <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #01a1e6; --tag-percent: 70%;">Bitrix24 <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #ff7a59; --tag-percent: 70%;">Hubspot <span class="circle-indicator"></span></span>
+                </div>
+            </section>
 
-		 <div class="container">
-			<br>
-			<br>
-		<div class="row justify-content-center">
-				<div class="col-md-7 ftco-animate text-center">
-				<!--	<h2>Have a<span> Question?  </span> <a href="https://forms.gle/uLaTShUKXraAvHJ77" class="btn btn-primary py-3 px-5">Click Here</a> </h2> -->
-				</div>
-			</div>
-				<br>
-					<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
-					  <li class="ftco-animate normal-txt">Find me on  </li>
-					  <li class="ftco-animate"><a href="#"><span class="icon-youtube"></span></a></li>
-					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/hiravishukla/"><span class="icon-linkedin"></span></a></li>  
-					  <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-					  <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-				      <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-					</ul>
-				<br>
-		   </div>
-   </div>
- </section>
+            <section id="education">
+                <h2 class="section-header">Education</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2009 — 2011</div>
+                        <h3 class="timeline-title">PGDMM</h3>
+                        <p class="timeline-subtitle">Welingker Institute, Mumbai</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2004 — 2007</div>
+                        <h3 class="timeline-title">B.Sc - Computer Application</h3>
+                        <p class="timeline-subtitle">Ewing Christian College, Allahabad</p>
+                    </div>
+                </div>
+            </section>
 
+            <section class="github-highlight">
+                <div class="github-overlay">
+                    <h2>I Love to Solve Business Problems.</h2>
+                    <p>Discover my technical projects, data analysis, and coding snippets.</p>
+                    <a href="https://github.com/shuklaanalyst" class="btn-glow">
+                        <i class="fab fa-github" style="margin-right: 8px;"></i> View My GitHub Work
+                    </a>
+                </div>
+            </section>
 
- 
-	
-    <footer class="ftco-footer ftco-section">
-		<div class="container">
-		  <div class="row">
-			<div class="col-md-12 text-center">
-  
-			  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-			</div>
-		  </div>
-		</div>
-	  </footer>
+            <footer>
+                <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Ravi Shukla</p>
+            </footer>
 
+        </main>
+    </div>
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  
-  <script src="js/main.js"></script>
-    
-  </body>
+</body>
 </html>
