@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravi Shukla | SFE & Data Analyst</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-base: #030712;
+            --surface: rgba(17, 24, 39, 0.4);
+            --surface-glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --glass-blur: blur(16px);
+            --golden-ratio: 1.618;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 242, 254, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(79, 172, 254, 0.08), transparent 25%);
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.618fr;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* ----- LEFT SIDEBAR (STICKY) ----- */
+        aside {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            max-height: 100vh;
+            overflow-y: auto;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-card {
+            background: var(--surface-glass);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Beautification decorative layer */
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 120px;
+            background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80') center/cover;
+            opacity: 0.3;
+            z-index: 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .profile-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes profileGlow {
+            0%   { box-shadow: 0 0 10px 3px rgba(255,0,0,0.25),   0 0 22px 6px rgba(255,0,0,0.1);   background: linear-gradient(135deg, #ff0000, #ff4444); }
+            14%  { box-shadow: 0 0 10px 3px rgba(255,127,0,0.25), 0 0 22px 6px rgba(255,127,0,0.1); background: linear-gradient(135deg, #ff4400, #ff9900); }
+            28%  { box-shadow: 0 0 10px 3px rgba(255,255,0,0.25), 0 0 22px 6px rgba(255,255,0,0.1); background: linear-gradient(135deg, #ffcc00, #ffff00); }
+            42%  { box-shadow: 0 0 10px 3px rgba(0,200,0,0.25),   0 0 22px 6px rgba(0,200,0,0.1);   background: linear-gradient(135deg, #00c800, #00ff88); }
+            57%  { box-shadow: 0 0 10px 3px rgba(0,100,255,0.25), 0 0 22px 6px rgba(0,100,255,0.1); background: linear-gradient(135deg, #0064ff, #00c8ff); }
+            71%  { box-shadow: 0 0 10px 3px rgba(75,0,130,0.25),  0 0 22px 6px rgba(75,0,130,0.1);  background: linear-gradient(135deg, #4b0082, #7b2fff); }
+            85%  { box-shadow: 0 0 10px 3px rgba(148,0,211,0.25), 0 0 22px 6px rgba(148,0,211,0.1); background: linear-gradient(135deg, #9400d3, #ee00ff); }
+            100% { box-shadow: 0 0 10px 3px rgba(255,0,0,0.25),   0 0 22px 6px rgba(255,0,0,0.1);   background: linear-gradient(135deg, #ff0000, #ff4444); }
+        }
+
+        .img-wrapper {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 0 10px 3px rgba(255,0,0,0.25), 0 0 22px 6px rgba(255,0,0,0.1);
+            position: relative;
+            display: inline-block;
+            animation: profileGlow 5s ease-in-out infinite;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--bg-base);
+        }
+
+        .linkedin-badge,
+        .github-badge {
+            position: absolute;
+            bottom: 4px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #ffffff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            z-index: 2;
+            text-decoration: none;
+        }
+
+        .linkedin-badge {
+            right: 4px;
+            background: #0077b5;
+            box-shadow: 0 2px 8px rgba(0,119,181,0.6);
+        }
+
+        .linkedin-badge:hover {
+            transform: scale(1.18);
+            box-shadow: 0 4px 14px rgba(0,119,181,0.85);
+        }
+
+        .github-badge {
+            left: 4px;
+            background: #24292e;
+            box-shadow: 0 2px 8px rgba(36,41,46,0.7);
+        }
+
+        .github-badge:hover {
+            transform: scale(1.18);
+            box-shadow: 0 4px 14px rgba(255,255,255,0.25);
+        }
+
+        .linkedin-badge i,
+        .github-badge i {
+            color: #fff;
+            font-size: 13px;
+            line-height: 1;
+        }
+
+        .profile-card h1 {
+            font-weight: 800;
+            font-size: 1.98rem;
+            margin-bottom: 0.2rem;
+            background: linear-gradient(to right, #fff, #bdc3c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-card .role {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .contact-info i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        /* ----- RIGHT MAIN CONTENT ----- */
+        main {
+            padding: 4rem 4rem 4rem 2rem;
+            font-size: 0.76em;
+        }
+
+        section {
+            margin-bottom: 5rem;
+        }
+
+        .section-header {
+            font-size: 2.45rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--text-main);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -5px;
+            width: 50%; height: 4px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 2px;
+        }
+
+        .text-lead {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            font-weight: 300;
+            background: linear-gradient(270deg, #00f2fe, #4facfe, #00f2fe, #a8ff78, #00f2fe);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: radiumGlow 15s ease infinite;
+        }
+
+        @keyframes radiumGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface-glass);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 242, 254, 0.3);
+            background: rgba(255,255,255, 0.05);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.2rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .ai-tools-label {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .ai-tool-chip {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 20px;
+            padding: 2px 8px 2px 5px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: var(--surface-glass);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 10px; height: 100%;
+            background: #fff;
+            box-shadow: 0 0 10px #fff;
+        }
+
+        .tags-wrapper {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--tag-color, var(--primary));
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--tag-color, var(--primary));
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .circle-indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: conic-gradient(var(--tag-color, var(--primary)) var(--tag-percent, 90%), rgba(255, 255, 255, 0.1) 0);
+            display: inline-block;
+            margin-left: 8px;
+            box-shadow: 0 0 5px var(--tag-color, var(--primary));
+        }
+
+        /* Education Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-base);
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .timeline-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .timeline-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* GitHub Highlight Section */
+        .github-highlight {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80') center/cover;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-top: 4rem;
+        }
+
+        .github-overlay {
+            background: linear-gradient(135deg, rgba(11, 15, 25, 0.95), rgba(0, 242, 254, 0.2));
+            padding: 5rem 3rem;
+            text-align: center;
+        }
+
+        .github-highlight h2 {
+            font-size: 2.7rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .github-highlight p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-main);
+        }
+
+        .btn-glow {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: #000;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 242, 254, 0.6);
+            color: #000;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+            aside {
+                position: relative;
+                height: auto;
+                padding: 2rem 2rem 0 2rem;
+            }
+            main {
+                padding: 3rem 2rem;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout-grid">
+        
+        <!-- Golden Ratio: 1 part (Sidebar) -->
+        <aside>
+            <div class="profile-card">
+                <div class="img-wrapper">
+                    <img src="images/about-me.png" alt="Ravi Shukla" onerror="this.src='https://ui-avatars.com/api/?name=Ravi+Shukla&background=00f2fe&color=000'">
+                    <a href="https://www.linkedin.com/in/hiravishukla/" target="_blank" class="linkedin-badge" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/shuklaanalyst" target="_blank" class="github-badge" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <h1>Ravi Shukla</h1>
+                <p class="role">Commercial Excellence, SFE & Data Analyst</p>
+                
+                <div class="contact-info">
+                    <div><i class="fas fa-map-marker-alt"></i> Mumbai, India</div>
+                    <div><i class="fas fa-envelope"></i> HiRavishukla@gmail.com</div>
+                    <div><i class="fas fa-phone-alt"></i> +91 9664 313233</div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/shuklaanalyst" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/hiravishukla/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Golden Ratio: 1.618 parts (Main Content) -->
+        <main>
+            
+            <section id="about">
+                <h2 class="section-header">Uncover Hidden <br>Data Stories.</h2>
+                <p class="text-lead">
+                    I am a results-oriented Data Analyst and Commercial Excellence Strategist with over a decade of experience leading data-driven transformations in the pharmaceutical and logistics sectors. My expertise lies at the intersection of Sales Force Effectiveness (SFE), artificial intelligence, and advanced analytics, where I translate complex datasets into clear, actionable business intelligence.<br><span style="display:block; margin-top: 0.5rem;"></span>I specialize in identifying hidden revenue opportunities and optimizing go-to-market strategies. Driven by a passion for automation and deep analytical insight, I consistently enable organizations to shift from intuition-based decisions to precise, data-driven decision-making.
+                </p>
+
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Achievements</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Mentored Students</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills">
+                <h2 class="section-header">Skills & Expertise</h2>
+                
+                <h3 class="skill-category-title" style="color: var(--primary); font-size: 1.1rem; margin-top: 1rem; margin-bottom: 1.5rem; font-weight: 600;">Technical Tools & Platforms</h3>
+                <div class="skills-grid">
+                    <div class="skill-column">
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Advanced Excel & Power Query (ETL)</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Power BI & DAX</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Statistics & Data Science</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Microsoft Dynamics 365</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Looker</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 75%;"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-column">
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Data Analytics</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Antigravity IDE</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 50%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>SQL</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 50%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header"><span>Python</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 50%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="ai-tools-label">
+                                    <span class="ai-tool-chip" title="Claude">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="12" fill="#CC785C"/><text x="12" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff" font-family="sans-serif">C</text></svg>
+                                        Claude
+                                    </span>
+                                    <span class="ai-tool-chip" title="Gemini">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:3px"><defs><linearGradient id="gGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4285F4"/><stop offset="100%" stop-color="#EA4335"/></linearGradient></defs><circle cx="12" cy="12" r="12" fill="url(#gGrad)"/><text x="12" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff" font-family="sans-serif">G</text></svg>
+                                        Gemini
+                                    </span>
+                                    <span class="ai-tool-chip" title="Replit">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="12" fill="#F26207"/><text x="12" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff" font-family="sans-serif">R</text></svg>
+                                        Replit
+                                    </span>
+                                    <span class="ai-tool-chip" title="Lovable">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="12" fill="#E8365D"/><text x="12" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff" font-family="sans-serif">L</text></svg>
+                                        Lovable
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 80%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="skill-category-title" style="color: var(--primary); font-size: 1.1rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 600;">Domain & Strategy</h3>
+                <div class="tags-wrapper" style="margin-top: 0;">
+                    <span class="skill-tag">SFE (Sales Force Effectiveness)</span>
+                    <span class="skill-tag">Commercial Excellence</span>
+                    <span class="skill-tag">Pharma Analytics</span>
+                    <span class="skill-tag">Pharmaceuticals & Logistics</span>
+                    <span class="skill-tag">IQVIA</span>
+                    <span class="skill-tag">SMSRC</span>
+                </div>
+
+                <h3 class="skill-category-title" style="color: var(--primary); font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1.5rem; font-weight: 600;">Methodologies & Operations</h3>
+                <div class="tags-wrapper" style="margin-top: 0;">
+                    <span class="skill-tag">Data Science & Analytics</span>
+                    <span class="skill-tag">AI Enabled Insight</span>
+                    <span class="skill-tag">Dashboard</span>
+                    <span class="skill-tag">Automation</span>
+                </div>
+
+                <h3 class="skill-category-title" style="color: var(--primary); font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1.5rem; font-weight: 600;">CRM & ERP Platforms</h3>
+                <div class="tags-wrapper" style="margin-top: 0;">
+                    <span class="skill-tag" style="--tag-color: #00a1e0; --tag-percent: 80%;">Salesforce <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #0078d4; --tag-percent: 90%;">D365 <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #ff3366; --tag-percent: 90%;">Phyzii <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #00d2ff; --tag-percent: 80%;">Hi Doctor <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #28a745; --tag-percent: 90%;">SanEforce <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #f39c12; --tag-percent: 100%;">CBO ERP <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #f0ab00; --tag-percent: 70%;">SAP <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #01a1e6; --tag-percent: 70%;">Bitrix24 <span class="circle-indicator"></span></span>
+                    <span class="skill-tag" style="--tag-color: #ff7a59; --tag-percent: 70%;">Hubspot <span class="circle-indicator"></span></span>
+                </div>
+
+                <h3 class="skill-category-title" style="color: var(--primary); font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1.5rem; font-weight: 600;">Hosting Platforms</h3>
+                <div class="tags-wrapper" style="margin-top: 0;">
+                    <span class="skill-tag hosting-tag" style="--tag-color: #e2e8f0; --tag-percent: 85%;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="12" fill="#171717"/><path d="M12 6L18.5 17H5.5L12 6Z" fill="#ffffff"/></svg>
+                        Vercel <span class="circle-indicator"></span>
+                    </span>
+                    <span class="skill-tag hosting-tag" style="--tag-color: #FF9900; --tag-percent: 75%;">
+                        <svg width="16" height="13" viewBox="0 0 60 38" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:5px"><path d="M18 10C18 4.477 22.477 0 28 0h4c5.523 0 10 4.477 10 10v2H18v-2z" fill="#FF9900"/><rect x="0" y="14" width="60" height="10" rx="5" fill="#FF9900"/><rect x="8" y="28" width="14" height="10" rx="3" fill="#FF9900"/><rect x="38" y="28" width="14" height="10" rx="3" fill="#FF9900"/></svg>
+                        AWS <span class="circle-indicator"></span>
+                    </span>
+                    <span class="skill-tag hosting-tag" style="--tag-color: #e74c3c; --tag-percent: 70%;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="12" fill="#e74c3c"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff" font-family="sans-serif">BR</text></svg>
+                        BigRock <span class="circle-indicator"></span>
+                    </span>
+                    <span class="skill-tag hosting-tag" style="--tag-color: #1bdbdb; --tag-percent: 70%;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="12" fill="#1bdbdb"/><text x="12" y="16" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff" font-family="sans-serif">GD</text></svg>
+                        GoDaddy <span class="circle-indicator"></span>
+                    </span>
+                </div>
+            </section>
+
+            <section id="education">
+                <h2 class="section-header">Education</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2009 — 2011</div>
+                        <h3 class="timeline-title">PGDMM</h3>
+                        <p class="timeline-subtitle">Welingker Institute, Mumbai</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2004 — 2007</div>
+                        <h3 class="timeline-title">B.Sc - Computer Application</h3>
+                        <p class="timeline-subtitle">Ewing Christian College, Allahabad</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="github-highlight">
+                <div class="github-overlay">
+                    <h2>I Love to Solve Business Problems.</h2>
+                    <p>Discover my technical projects, data analysis, and coding snippets.</p>
+                    <a href="https://github.com/shuklaanalyst" class="btn-glow">
+                        <i class="fab fa-github" style="margin-right: 8px;"></i> View My GitHub Work
+                    </a>
+                </div>
+            </section>
+
+            <footer>
+                <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Ravi Shukla</p>
+            </footer>
+
+        </main>
+    </div>
+
+</body>
+</html>
